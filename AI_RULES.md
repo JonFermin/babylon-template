@@ -12,7 +12,9 @@
 # Architecture
 
 - Use a <canvas id="renderCanvas"> element in index.html. The Engine attaches to this canvas.
-- Create the Engine with new Engine(canvas, true) for anti-aliasing.
+- Create the engine with EngineFactory.CreateAsync(canvas, {}) for automatic WebGPU/WebGL selection.
+- Import the WebGPU engine side-effect for factory support: import "@babylonjs/core/Engines/webgpuEngine.js"
+- Scene functions accept AbstractEngine (not Engine) so they work with both WebGL and WebGPU engines.
 - The render loop is engine.runRenderLoop(() => scene.render()).
 - Handle window resize with window.addEventListener("resize", () => engine.resize()).
 - Use ArcRotateCamera for orbital controls, FreeCamera for first-person, or FollowCamera for third-person.
@@ -22,11 +24,13 @@
 
 - Do NOT use React, HTML DOM elements, or CSS for 3D rendering. Everything renders on the Babylon.js canvas.
 - Do NOT install or use shadcn/ui, Tailwind CSS, or any UI component library.
-- Import only what you need from @babylonjs/core for tree-shaking:
-  - import { Engine } from "@babylonjs/core/Engines/engine";
-  - import { Scene } from "@babylonjs/core/scene";
-  - import { Vector3 } from "@babylonjs/core/Maths/math.vector";
-  - import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder";
+- All @babylonjs/core imports MUST include the .js file extension for proper ES module resolution:
+  - import { EngineFactory } from "@babylonjs/core/Engines/engineFactory.js";
+  - import { AbstractEngine } from "@babylonjs/core/Engines/abstractEngine.js";
+  - import { Scene } from "@babylonjs/core/scene.js";
+  - import { Vector3 } from "@babylonjs/core/Maths/math.vector.js";
+  - import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
+- Import only what you need from @babylonjs/core for tree-shaking.
 - Use TypeScript interfaces for game data structures.
 - For 2D UI overlays (HUD, menus), install @babylonjs/gui and use AdvancedDynamicTexture, NOT HTML elements.
 

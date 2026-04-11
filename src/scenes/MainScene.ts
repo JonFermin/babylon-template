@@ -1,13 +1,13 @@
-import { Scene } from "@babylonjs/core/scene";
-import { Engine } from "@babylonjs/core/Engines/engine";
-import { Vector3 } from "@babylonjs/core/Maths/math.vector";
-import { Color3, Color4 } from "@babylonjs/core/Maths/math.color";
-import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
-import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
-import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder";
-import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial";
+import { Scene } from "@babylonjs/core/scene.js";
+import { AbstractEngine } from "@babylonjs/core/Engines/abstractEngine.js";
+import { Vector3 } from "@babylonjs/core/Maths/math.vector.js";
+import { Color3, Color4 } from "@babylonjs/core/Maths/math.color.js";
+import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera.js";
+import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight.js";
+import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
+import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial.js";
 
-export function createMainScene(engine: Engine, canvas: HTMLCanvasElement) {
+export function createMainScene(engine: AbstractEngine, canvas: HTMLCanvasElement) {
   const scene = new Scene(engine);
   scene.clearColor = new Color4(0.1, 0.1, 0.18, 1);
 
