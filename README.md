@@ -6,7 +6,7 @@ This template is designed to be used with [Dyad](https://dyad.sh) as a starting 
 
 ## Tech Stack
 
-- **Babylon.js 7** — WebGL/WebGPU 3D engine
+- **Babylon.js 8** — WebGL/WebGPU 3D engine (auto-selects WebGPU when available)
 - **Vite 6** — fast dev server and bundler
 - **TypeScript 5.7**
 
@@ -19,6 +19,13 @@ npm run dev
 
 Then open the local URL printed in the terminal.
 
+You should see a rotating shaded cube casting a shadow on a ground plane.
+
+- **Mouse drag** — orbit the camera
+- **Mouse wheel** — zoom
+- **Spacebar** — pause / resume cube rotation
+- **I** — toggle the Babylon Inspector (requires `@babylonjs/inspector`, see Next steps)
+
 ## Scripts
 
 - `npm run dev` — start the Vite dev server with HMR
@@ -30,9 +37,31 @@ Then open the local URL printed in the terminal.
 
 ```
 src/
-  main.ts        # entry point, engine bootstrap
-  scenes/        # Babylon scenes
+  main.ts        # entry point, engine bootstrap, error overlay, inspector toggle
+  scenes/        # Babylon scenes (camera, lighting, environment setup)
+  entities/      # game objects/classes (RotatingBox example)
+  utils/         # helpers (create when needed)
 ```
+
+## Next Steps
+
+This starter is intentionally lean. Install only what you need:
+
+```bash
+# Load glTF / OBJ / STL models
+npm i @babylonjs/loaders
+
+# In-canvas 2D UI (HUD, menus)
+npm i @babylonjs/gui
+
+# Havok physics
+npm i @babylonjs/havok
+
+# Babylon Inspector (enables the I-key toggle in main.ts)
+npm i -D @babylonjs/inspector
+```
+
+See `AI_RULES.md` for the conventions this template follows (ES module imports with `.js` extensions, scene/entity layout, etc.).
 
 ## Built With Dyad
 

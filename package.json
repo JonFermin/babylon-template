@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@babylonjs/core": "^7.0.0"
+    "@babylonjs/core": "^8.0.0"
   },
   "devDependencies": {
     "typescript": "~5.7.2",
     "vite": "^6.3.4"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
