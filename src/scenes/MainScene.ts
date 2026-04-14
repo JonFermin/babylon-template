@@ -6,6 +6,7 @@ import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera.js";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight.js";
 import { DirectionalLight } from "@babylonjs/core/Lights/directionalLight.js";
 import { ShadowGenerator } from "@babylonjs/core/Lights/Shadows/shadowGenerator.js";
+import "@babylonjs/core/Lights/Shadows/shadowGeneratorSceneComponent.js";
 import { Mesh } from "@babylonjs/core/Meshes/mesh.js";
 import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
 import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial.js";

@@ -23,8 +23,10 @@ function setupInspectorToggle(scene: Scene) {
     if (e.key !== "i" && e.key !== "I") return;
     try {
       await import("@babylonjs/core/Debug/debugLayer.js");
-      // @ts-expect-error - optional dev dependency, not in package.json
-      await import("@babylonjs/inspector");
+      // Build a non-literal specifier so Vite's import-analysis skips it.
+      // Inspector is an optional dev dependency that may not be installed.
+      const inspectorPkg = ["@babylonjs", "inspector"].join("/");
+      await import(/* @vite-ignore */ inspectorPkg);
       if (scene.debugLayer.isVisible()) {
         scene.debugLayer.hide();
       } else {
