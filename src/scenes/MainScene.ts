@@ -10,11 +10,8 @@ import "@babylonjs/core/Lights/Shadows/shadowGeneratorSceneComponent.js";
 import { Mesh } from "@babylonjs/core/Meshes/mesh.js";
 import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
 import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial.js";
-import {
-  KeyboardEventTypes,
-  KeyboardInfo,
-} from "@babylonjs/core/Events/keyboardEvents.js";
 import { RotatingBox } from "../entities/RotatingBox.js";
+import { Input } from "../input/Input.js";
 
 export function createMainScene(
   engine: AbstractEngine,
@@ -29,9 +26,13 @@ export function createMainScene(
 
   const box = new RotatingBox(scene, new Vector3(0, 1, 0));
   setupShadows(directional, [box.mesh], ground);
-  setupInput(scene, box);
 
-  scene.onBeforeRenderObservable.add(() => box.update());
+  const input = new Input(scene);
+  scene.onBeforeRenderObservable.add(() => {
+    if (input.wasPressed("Space")) box.paused = !box.paused;
+    box.update();
+  });
+  scene.onDisposeObservable.add(() => input.dispose());
 
   return scene;
 }
@@ -87,11 +88,3 @@ function setupShadows(light: DirectionalLight, casters: Mesh[], _ground: Mesh) {
   return shadowGenerator;
 }
 
-function setupInput(scene: Scene, box: RotatingBox) {
-  scene.onKeyboardObservable.add((info: KeyboardInfo) => {
-    if (info.type !== KeyboardEventTypes.KEYDOWN) return;
-    if (info.event.code === "Space") {
-      box.paused = !box.paused;
-    }
-  });
-}

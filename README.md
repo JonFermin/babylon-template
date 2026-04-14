@@ -37,11 +37,17 @@ You should see a rotating shaded cube casting a shadow on a ground plane.
 
 ```
 src/
-  main.ts        # entry point, engine bootstrap, error overlay, inspector toggle
+  main.ts        # entry point, engine bootstrap, error overlay, inspector toggle, HMR cleanup
   scenes/        # Babylon scenes (camera, lighting, environment setup)
   entities/      # game objects/classes (RotatingBox example)
-  utils/         # helpers (create when needed)
+  input/         # Input helper (held + edge-triggered keyboard state)
+  ui/            # in-canvas HUD overlays via @babylonjs/gui (stub)
+  utils/         # helpers (time/delta-seconds, etc.)
 ```
+
+## AI Agent Rules
+
+This repo includes [`AI_RULES.md`](./AI_RULES.md) — the canonical conventions for any AI assistant editing the project (side-effect imports, black-screen checklist, banned imports, etc.). `CLAUDE.md` and `AGENTS.md` re-export it so Claude Code, Codex, Cursor, and Aider all pick it up automatically.
 
 ## Next Steps
 

@@ -11,9 +11,18 @@ try {
 
   engine.runRenderLoop(() => scene.render());
 
-  window.addEventListener("resize", () => engine.resize());
+  const onResize = () => engine.resize();
+  window.addEventListener("resize", onResize);
 
   setupInspectorToggle(scene);
+
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      window.removeEventListener("resize", onResize);
+      scene.dispose();
+      engine.dispose();
+    });
+  }
 } catch (err) {
   showFatalError(err);
 }

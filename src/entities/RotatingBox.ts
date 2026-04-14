@@ -4,13 +4,18 @@ import { Color3 } from "@babylonjs/core/Maths/math.color.js";
 import { Mesh } from "@babylonjs/core/Meshes/mesh.js";
 import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
 import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial.js";
+import { getDeltaSeconds } from "../utils/time.js";
 
 export class RotatingBox {
   readonly mesh: Mesh;
   paused = false;
-  spinSpeed = 0.01;
+  // Radians per second.
+  spinSpeed = 0.6;
 
-  constructor(scene: Scene, position: Vector3) {
+  constructor(
+    private readonly scene: Scene,
+    position: Vector3,
+  ) {
     this.mesh = MeshBuilder.CreateBox("box", { size: 1 }, scene);
     this.mesh.position.copyFrom(position);
 
@@ -21,7 +26,8 @@ export class RotatingBox {
 
   update() {
     if (this.paused) return;
-    this.mesh.rotation.y += this.spinSpeed;
-    this.mesh.rotation.x += this.spinSpeed * 0.5;
+    const dt = getDeltaSeconds(this.scene);
+    this.mesh.rotation.y += this.spinSpeed * dt;
+    this.mesh.rotation.x += this.spinSpeed * 0.5 * dt;
   }
 }
