@@ -22,10 +22,10 @@ export function createMainScene(
 
   setupCamera(scene, canvas);
   const directional = setupLighting(scene);
-  const ground = setupEnvironment(scene);
+  setupEnvironment(scene);
 
   const box = new RotatingBox(scene, new Vector3(0, 1, 0));
-  setupShadows(directional, [box.mesh], ground);
+  setupShadows(directional, [box.mesh]);
 
   const input = new Input(scene);
   scene.onBeforeRenderObservable.add(() => {
@@ -78,7 +78,7 @@ function setupEnvironment(scene: Scene) {
   return ground;
 }
 
-function setupShadows(light: DirectionalLight, casters: Mesh[], _ground: Mesh) {
+function setupShadows(light: DirectionalLight, casters: Mesh[]) {
   const shadowGenerator = new ShadowGenerator(1024, light);
   shadowGenerator.useBlurExponentialShadowMap = true;
   shadowGenerator.blurKernel = 32;
